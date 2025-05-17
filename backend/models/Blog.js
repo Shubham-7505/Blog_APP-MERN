@@ -14,9 +14,10 @@ const blogSchema = new mongoose.Schema({
     type: String,
     default: 'Anonymous'
   },
-  createdat: {
+  createdAt: {
     type: Date,
     default: Date.now
   }
 });
 const Blog = mongoose.model('Blog', blogSchema);
+module.exports = Blog;
