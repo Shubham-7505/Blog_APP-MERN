@@ -1,22 +1,7 @@
 import React,  {useEffect, useState } from 'react';
 import axios from 'axios';
 
-const BlogList = () => {
-    const [blogs, setBlogs] = useState([]);
-    
-    useEffect(()=>{
-        const fetchBlogs = async () =>{
-            try {
-                const res = await axios.get('http://localhost:5000/api/blogs');
-                setBlogs(res.data);
-            }
-            catch (error) {
-                console.error("Error fetching blogs:", error);
-            }
-        };
-        fetchBlogs();
-
-    }, []);
+const BlogList = ({blogs}) => {
     return (
         <div>
             <h2>All Blogs</h2>
