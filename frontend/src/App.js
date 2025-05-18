@@ -19,13 +19,21 @@ function App() {
     fetchBlogs();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/blogs/${id}`);
+      fetchBlogs();
+    } catch (error) {
+      console.error("Error deleting blog:", error);
+    }
+  };
 
   return (
     <div className="App">
       <h1>Blog App</h1>
       <CreateBlog onBlogCreated = {fetchBlogs}/>
       <hr />
-      <BlogList blogs={blogs}/>
+      <BlogList blogs={blogs} onDelete={handleDelete}/>
     </div>
   );
 }
