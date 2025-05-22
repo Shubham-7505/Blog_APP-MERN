@@ -1,17 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  const location = useLocation();
+
+  const linkClass = (path) =>
+    `hover:underline ${
+      location.pathname === path ? "font-semibold underline" : ""
+    }`;
+
   return (
-    <nav className="fixed top-0 left-0 w-full bg-blue-600 text-white p-4 shadow-md z-50">
-      <div className="flex justify-between items-center max-w-7xl mx-auto">
-        <h1 className="text-2xl font-bold">
-          <Link to="/">MyBlog</Link>
-        </h1>
-        <div className="space-x-4">
-          <Link to="/" className="hover:text-blue-200">Home</Link>
-          <Link to="/create" className="hover:text-blue-200">Create Blog</Link>
-          <Link to="/about" className="hover:text-blue-200">About</Link>
+    <nav className="bg-blue-600 text-white shadow-md">
+      <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+        <div className="text-2xl font-bold">
+          <Link to="/">BlogApp</Link>
+        </div>
+        <div className="space-x-6 text-lg">
+          <Link to="/" className={linkClass("/")}>
+            Home
+          </Link>
+          <Link to="/create" className={linkClass("/create")}>
+            Create Blog
+          </Link>
+          <Link to="/about" className={linkClass("/about")}>
+            About
+          </Link>
         </div>
       </div>
     </nav>

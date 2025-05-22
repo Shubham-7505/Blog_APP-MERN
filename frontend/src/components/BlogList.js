@@ -28,12 +28,15 @@ const BlogList = ({ blogs, onDelete, onUpdate }) => {
   };
 
   return (
-    <div>
-      <h2>All Blogs</h2>
+    <div className="mt-8">
+      <h2 className="text-2xl font-semibold mb-4">All Blogs</h2>
       {blogs.map((blog) => (
-        <div key={blog._id} style={{ border: '1px solid #ccc', margin: '10px', padding: '10px' }}>
+        <div
+          key={blog._id}
+          className="bg-white shadow-md rounded-lg p-6 mb-6 border border-gray-200"
+        >
           {editingId === blog._id ? (
-            <form onSubmit={handleUpdate}>
+            <form onSubmit={handleUpdate} className="space-y-4">
               <input
                 type="text"
                 name="title"
@@ -41,7 +44,7 @@ const BlogList = ({ blogs, onDelete, onUpdate }) => {
                 onChange={handleChange}
                 placeholder="Title"
                 required
-                style={{ display: 'block', margin: '10px 0' }}
+                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <textarea
                 name="content"
@@ -49,7 +52,7 @@ const BlogList = ({ blogs, onDelete, onUpdate }) => {
                 onChange={handleChange}
                 placeholder="Content"
                 required
-                style={{ display: 'block', margin: '10px 0' }}
+                className="w-full p-2 border border-gray-300 rounded h-28 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <input
                 type="text"
@@ -58,29 +61,48 @@ const BlogList = ({ blogs, onDelete, onUpdate }) => {
                 onChange={handleChange}
                 placeholder="Author"
                 required
-                style={{ display: 'block', margin: '10px 0' }}
+                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <button type="submit" style={{ marginRight: '10px' }}>Update Blog</button>
-              <button type="button" onClick={() => setEditingId(null)}>Cancel</button>
+              <div className="flex space-x-4">
+                <button
+                  type="submit"
+                  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                >
+                  Update Blog
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setEditingId(null)}
+                  className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+                >
+                  Cancel
+                </button>
+              </div>
             </form>
           ) : (
             <>
-              <h3>{blog.title}</h3>
-              <p>{blog.content}</p>
-              <p><strong>Author:</strong> {blog.author}</p>
-              <p><strong>Date:</strong> {new Date(blog.createdAt).toLocaleDateString()}</p>
-              <button
-                onClick={() => onDelete(blog._id)}
-                style={{ backgroundColor: 'red', color: 'white', border: 'none', padding: '5px 10px', marginRight: '10px' }}
-              >
-                Delete
-              </button>
-              <button
-                onClick={() => startEditing(blog)}
-                style={{ backgroundColor: 'blue', color: 'white', border: 'none', padding: '5px 10px' }}
-              >
-                Edit
-              </button>
+              <h3 className="text-xl font-bold mb-2">{blog.title}</h3>
+              <p className="text-gray-700 mb-2">{blog.content}</p>
+              <p className="text-sm text-gray-500">
+                <strong>Author:</strong> {blog.author}
+              </p>
+              <p className="text-sm text-gray-500 mb-4">
+                <strong>Date:</strong> {new Date(blog.createdAt).toLocaleDateString()}
+              </p>
+              <div className="flex space-x-4">
+                <button
+                  onClick={() => onDelete(blog._id)}
+                  className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+                >
+                  Delete
+                </button>
+                <button
+                  onClick={() => startEditing(blog)}
+                  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                >
+                  Edit
+                </button>
+              </div>
             </>
           )}
         </div>
