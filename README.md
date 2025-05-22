@@ -86,3 +86,8 @@ Now The app is running on:
 Frontend: http://localhost:3000
 Backend API: http://localhost:5000
 ```
+
+### What Next ?
+
+   Will add a full authentication,
+   open and read each blog separately.
