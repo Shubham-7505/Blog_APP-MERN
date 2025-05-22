@@ -10,7 +10,7 @@ const Navbar = () => {
     }`;
 
   return (
-    <nav className="bg-blue-600 text-white shadow-md">
+    <nav className="bg-blue-600 text-white shadow-md fixed top-0 w-full z-50">
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
         <div className="text-2xl font-bold">
           <Link to="/">BlogApp</Link>
