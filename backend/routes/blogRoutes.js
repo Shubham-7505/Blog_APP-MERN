@@ -25,6 +25,7 @@ router.get('/', async (req, res)=>{
     }
 });
 
+// Delete a blog post
 router.delete('/:id', async (req, res) =>{
     try {
         const deletedBlog = await Blog.findByIdAndDelete(req.params.id);
@@ -36,6 +37,26 @@ router.delete('/:id', async (req, res) =>{
     catch (err) {
         console.error(err);
         res.status(500).json({ error: "Failed to delete blog post" });
+    }
+});
+
+// Update a blog post
+router.put('/:id', async (req,res) =>{
+    try{
+        const {title, content, author} = req.body;
+        const updatedBlog = await Blog.findByIdAndUpdate(
+            req.params.id,
+            {title, content, author},
+            {new: true, runValidators: true}
+        );
+        if(!updatedBlog){
+            return res.status(404).json({ error: "Blog post not found" });
+        }
+        res.status(200).json(updatedBlog);
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({ error: "Failed to update blog post" });
     }
 });
 
