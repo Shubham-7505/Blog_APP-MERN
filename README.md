@@ -45,14 +45,17 @@ git clone https://github.com/yourusername/Blog_APP-MERN.git
 cd Blog_APP-MERN
 
 2. Backend Setup
-
-cd backend
-npm install
+```bash
+   cd backend
+   npm install
+```
 
 3. Create a .env file and configure MongoDB URI
 
-4. Start the server  
+4. Start the server 
+ ```bash 
    node server.js
+```
 
 5. Frontend Setup
 
