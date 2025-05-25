@@ -5,10 +5,15 @@ BlogApp – MERN Stack Blog Application
 Features
 
    Create & Edit Blogs – Logged-in users can compose and modify blog posts.
+
    View All Blogs – Explore all blogs in a beautifully laid-out feed.
+
    Delete Blogs – Secure deletion available only to the blog's author.
+
    Authentication & Authorization – JWT-based auth ensures secure access control.
+
    Responsive Design – Fully responsive with modern Tailwind styling.
+   
    Client-Side Routing – Smooth navigation using React Router.
 
 Tech Stack
@@ -32,22 +37,23 @@ Blog_APP-MERN/
 │   ├── app.js
 │   └── package.json
 └── frontend/
-    ├── src/
-    │   ├── components/
-    │   │   ├── BlogDetail.js
-    │   │   ├── BlogList.js
-    │   │   ├── CreateBlog.js
-    │   │   ├── EditBlog.js
-    │   │   ├── Login.js
-    │   │   ├── MyBlogs.js
-    │   │   ├── Navbar.js
-    │   │   └── Signup.js
-    │   ├── App.js
-    │   ├── index.js
-    │   └── index.css (or other style files)
-    ├── tailwind.config.js
-    ├── postcss.config.js
-    └── package.json
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── BlogDetail.js
+│   │   │   ├── BlogList.js
+│   │   │   ├── CreateBlog.js
+│   │   │   ├── EditBlog.js
+│   │   │   ├── Login.js
+│   │   │   ├── MyBlogs.js
+│   │   │   ├── Navbar.js
+│   │   │   └── Signup.js
+│   │   ├── App.js
+│   │   ├── index.js
+│   │   └── index.css (or other style files)
+│   ├── tailwind.config.js
+│   ├── postcss.config.js
+│   └── package.json
+└── README.md
 ```
 ## 🔧 Setup Instructions
 1. Clone the Repository
