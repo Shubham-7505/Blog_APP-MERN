@@ -1,16 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import axios from "axios";
 import Navbar from "./components/Navbar";
 import BlogList from "./components/BlogList";
 import CreateBlog from "./components/CreateBlog";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
+import MyBlogs from "./components/MyBlogs";
+import EditBlog from "./components/EditBlog";
+import BlogDetail from './components/BlogDetail';
 
 function App() {
+  const [user, setUser] = useState(null);
   const [blogs, setBlogs] = useState([]);
 
   const fetchBlogs = async () => {
+    if (!user) return;
     try {
-      const res = await axios.get("http://localhost:5000/api/blogs");
+      const token = localStorage.getItem("token");
+      const res = await axios.get("http://localhost:5000/api/blogs", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setBlogs(res.data);
     } catch (error) {
       console.error("Error fetching blogs:", error);
@@ -18,41 +33,62 @@ function App() {
   };
 
   useEffect(() => {
-    fetchBlogs();
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
   }, []);
 
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://localhost:5000/api/blogs/${id}`);
-      fetchBlogs();
-    } catch (error) {
-      console.error("Error deleting blog:", error);
-    }
+  useEffect(() => {
+    fetchBlogs();
+  }, [user]);
+
+  const PrivateRoute = ({ children }) => {
+    return user ? children : <Navigate to="/login" />;
   };
 
   return (
     <Router>
-      <div className="bg-gray-50 min-h-screen pt-5">
-        <Navbar />
-        <div className="max-w-4xl mx-auto p-4 mt-6">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <BlogList
-                  blogs={blogs}
-                  onDelete={handleDelete}
-                  onUpdate={fetchBlogs}
-                />
-              }
-            />
-            <Route
-              path="/create"
-              element={<CreateBlog onBlogCreated={fetchBlogs} />}
-            />
-            <Route path="/about" element={<p className="text-lg">This is a blog app created using MERN stack.</p>} />
-          </Routes>
-        </div>
+      <div>
+        <Navbar user={user} setUser={setUser} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <BlogList blogs={blogs} onUpdate={fetchBlogs} user={user} />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/create"
+            element={
+              <PrivateRoute>
+                <CreateBlog onBlogCreated={fetchBlogs} />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/my-blogs"
+            element={
+              <PrivateRoute>
+                <MyBlogs user={user} />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/edit/:id"
+            element={
+              <PrivateRoute>
+                <EditBlog />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/blog/:id" element={<BlogDetail />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login setUser={setUser} />} />
+          <Route path="*" element={<Navigate to={user ? "/" : "/login"} />} />
+        </Routes>
       </div>
     </Router>
   );

@@ -1,14 +1,15 @@
-BlogApp - MERN Stack Blog Application
+BlogApp – MERN Stack Blog Application
 
-   A full stack blog app using **MongoDB, Express.js, React, Node.js**, styled with **Tailwind CSS**. Users can create, view, update, and delete blogs with a clean UI and smooth navigation.
+   A full-stack blog platform built with MongoDB, Express.js, React, and Node.js (MERN stack), styled using Tailwind CSS. This application allows users to create, view, update, and delete blog posts through a clean and intuitive UI.
 
 Features
 
-   Create & edit blogs  
-   View all blogs  
-   Delete blogs  
-   Responsive UI with Tailwind  
-   React Router for navigation
+   Create & Edit Blogs – Logged-in users can compose and modify blog posts.
+   View All Blogs – Explore all blogs in a beautifully laid-out feed.
+   Delete Blogs – Secure deletion available only to the blog's author.
+   Authentication & Authorization – JWT-based auth ensures secure access control.
+   Responsive Design – Fully responsive with modern Tailwind styling.
+   Client-Side Routing – Smooth navigation using React Router.
 
 Tech Stack
 
@@ -20,18 +21,27 @@ Tech Stack
 Blog_APP-MERN/
 
 ├── backend/
-│   ├── models/
-│   │   └── Blog.js
+│   ├── middleware/
+│   │   └── auth.js
+├── ├── models/
+│   │   ├── Blog.js
+│   │   └── User.js
 │   ├── routes/
-│   │   └── blogs.js
-│   ├── server.js
+│   │   ├── blogRoutes.js
+│   │   └── auth.js
+│   ├── app.js
 │   └── package.json
 └── frontend/
     ├── src/
     │   ├── components/
+    │   │   ├── BlogDetail.js
     │   │   ├── BlogList.js
     │   │   ├── CreateBlog.js
-    │   │   └── Navbar.js
+    │   │   ├── EditBlog.js
+    │   │   ├── Login.js
+    │   │   ├── MyBlogs.js
+    │   │   ├── Navbar.js
+    │   │   └── Signup.js
     │   ├── App.js
     │   ├── index.js
     │   └── index.css (or other style files)
